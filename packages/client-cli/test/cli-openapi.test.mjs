@@ -890,6 +890,10 @@ test('openapi client generation (javascript) from file with fullRequest, fullRes
 `), true)
     equal(data.includes(`
   export type Full = {
+    /**
+     * @param req - request parameters object
+     * @returns the API response
+     */
     postHello(req: PostHelloRequest): Promise<PostHelloResponses>;
   }`), true)
     const implementationFile = join(dir, 'full', 'full.cjs')
@@ -957,6 +961,10 @@ test('do not generate implementation file if in platformatic service', async (t)
 `), true)
     equal(data.includes(`
   export type Full = {
+    /**
+     * @param req - request parameters object
+     * @returns the API response
+     */
     postHello(req: PostHelloRequest): Promise<PostHelloResponses>;
   }`), true)
   }
@@ -988,9 +996,15 @@ test('common parameters in paths', async (t) => {
   equal(data.includes(`
   export type GetPathWithFieldIdRequest = {
     path: {
+      /**
+       * A field ID
+       */
       'fieldId': string;
     }
     query: {
+      /**
+       * Movie id
+       */
       'movieId': string;
     }
   }
@@ -998,6 +1012,9 @@ test('common parameters in paths', async (t) => {
   equal(data.includes(`
   export type GetSampleRequest = {
     query: {
+      /**
+       * Movie id
+       */
       'movieId': string;
     }
   }
@@ -1005,6 +1022,9 @@ test('common parameters in paths', async (t) => {
   equal(data.includes(`
   export type PostPathWithFieldIdRequest = {
     path: {
+      /**
+       * A field ID
+       */
       'fieldId': string;
     }
   }
@@ -1090,6 +1110,10 @@ test('requestbody as array', async (t) => {
 
   equal(data.includes(`
   export type Movies = {
+    /**
+     * @param req - request parameters object
+     * @returns the API response body
+     */
     postFoobar(req: PostFoobarRequest[]): Promise<PostFoobarResponses>;
   }
 `), true)
@@ -1121,6 +1145,10 @@ test('support formdata', async (t) => {
   const data = await readFile(typeFile, 'utf-8')
   equal(data.includes(`
   export type Movies = {
+    /**
+     * @param req - request parameters object
+     * @returns the API response body
+     */
     postSample(req: PostSampleRequest): Promise<PostSampleResponses>;
   }
 `), true)
